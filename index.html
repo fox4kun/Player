@@ -1,91 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Player List</title>
+<link rel="icon" type="image/jpeg" href="logo.jpg"> <!-- إضافة اللوجو كأيقونة الموقع -->
 <style>
-.player-table {
-  width: 100%;
-  border-collapse: collapse;
-}
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+  }
 
-.player-table th, .player-table td {
-  padding: 10px;
-  text-align: center;
-  border: 1px solid #ddd;
-}
+  .container {
+    max-width: 600px;
+    margin: auto;
+    background-color: #1e1e1e;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    text-align: center;
+  }
 
-.player-table th {
-  background-color: #f2f2f2;
-}
+  h1 {
+    color: #4CAF50;
+  }
 
-.player-table tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
+  .logo-container {
+    margin-bottom: 20px;
+  }
 
-.player-table tr:hover {
-  background-color: #e5e5e5;
-}
+  .logo-container img {
+    width: 100px;
+    height: auto;
+    border: 2px solid #4CAF50;
+    border-radius: 50%;
+    padding: 10px;
+    background-color: #333;
+  }
+
+  .player-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+  }
+
+  .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .btn:hover {
+    background-color: #45a049;
+  }
 </style>
+<script src="players.js"></script>
+<script>
+  function goToPlayerPage() {
+    const playerSelect = document.getElementById('playerSelect');
+    const selectedPlayer = playerSelect.value;
+    if (selectedPlayer) {
+      window.location.href = `player.html?player=${selectedPlayer}`;
+    }
+  }
+</script>
 </head>
 <body>
 
-<table class="player-table">
-  <tr>
-    <th>لاعبين</th>
-    <th>ايدي اللاعب</th>
-    <th>شارات اللاعب</th>
-    <th>اوسمة اللاعب</th>
-    <th>تاريخ الانضمام</th>
-  </tr>
-  <tr>
-    <td>ALmegdad294</td>
-    <td></td>
-    <td>شارة المحقق الثعلب</td>
-    <td>وسام شرف الثعالب</td>
-    <td>23 مايو</td>
-  </tr>
-  <tr>
-    <td>Alzyesno</td>
-    <td></td>
-    <td> الثعلب الحكيم </br>منقذ الثعالب </td>
-<td>وسام شرف الثعالب</td>
-    <td>24 مايو</td>
-  </tr>
-  <tr>
-    <td>M M</td>
-    <td></td>
-    <td>شارة الشبح الثعلب</td>
-<td>وسام شرف الثعالب</td>
-    <td>27 مايو</td>
-  </tr>
-  <tr>
-    <td>Bepo00001</td>
-    <td></td>
-    <td>ثعلب السرعة</td>
-    <td></td>
-    <td>27 مايو</td>
-  </tr>
-  <tr>
-    <td>Ali Mirghani</td>
-    <td></td>
-    <td>ثعلب الظلام</td>
-    <td></td>
-    <td>27 مايو</td>
-  </tr>
-  <tr>
-    <td>xenoxflame</td>
-    <td></td>
-    <td>ثعلب النار</td>
-    <td></td>
-    <td>11 يونيو</td>
-  </tr>
-    <tr>
-    <td>Ahmed Aamir </td>
-    <td></td>
-    <td>الثعلب الملاح</td>
-    <td></td>
-    <td> 12 يونيو</td>
-  </tr>
-</table>
+<div class="container">
+  <div class="logo-container">
+    <img src="logo.jpg" alt="Logo">
+  </div>
+  <h1>Select a Player</h1>
+  <select id="playerSelect" class="player-select">
+    <option value="">Choose a player...</option>
+    <option value="ALmegdad294">ALmegdad294</option>
+    <option value="Alzyesno">Alzyesno</option>
+    <option value="MM">M M</option>
+    <option value="Bepo00001">Bepo00001</option>
+    <option value="AliMirghani">Ali Mirghani</option>
+    <option value="xenoxflame">xenoxflame</option>
+    <option value="AhmedAamir">Ahmed Aamir</option>
+  </select>
+  <button class="btn" onclick="goToPlayerPage()">View Details</button>
+</div>
 
 </body>
 </html>
