@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Player Details</title>
+<link rel="icon" type="image/jpeg" href="logo.jpg">
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: auto;
+    background-color: #1e1e1e;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .player-details img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+
+  .player-details h2 {
+    margin: 10px 0;
+    color: #4CAF50;
+  }
+
+  .player-details p {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+
+  .player-details span {
+    font-weight: bold;
+    color: #4CAF50;
+  }
+
+  .back-btn {
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .back-btn:hover {
+    background-color: #45a049;
+  }
+</style>
+<script src="players.js"></script>
+<script>
+  function getPlayerDetails() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const playerName = urlParams.get('player');
+    const player = players[playerName];
+    if (player) {
+      document.getElementById('playerName').innerText = playerName;
+      document.getElementById('playerId').innerText = player.id;
+      document.getElementById('playerBadges').innerHTML = player.badges;
+      document.getElementById('playerMedals').innerText = player.medals;
+      document.getElementById('joinDate').innerText = player.joinDate;
+      document.getElementById('playerImage').src = player.image;
+    }
+  }
+
+  window.onload = getPlayerDetails;
+</script>
+</head>
+<body>
+
+<div class="container">
+  <div class="player-details">
+    <img id="playerImage" src="" alt="Player Icon">
+    <h2 id="playerName">Player Name: </h2>
+    <p>Player ID: <span id="playerId"></span></p>
+    <p>Player Badges: <span id="playerBadges"></span></p>
+    <p>Player Medals: <span id="playerMedals"></span></p>
+    <p>Join Date: <span id="joinDate"></span></p>
+  </div>
+  <button class="back-btn" onclick="window.history.back()">Back to List</button>
+</div>
+
+</body>
+</html>
