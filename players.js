@@ -6,7 +6,7 @@ const players = {
     joinDate: 'May 23',
     image: '1.jpg'
   },
-  'Alzyesno': {
+  'Wenare': {
     id: '',
     badges: 'Wise Fox & Fox Savior',
     medals: 'Foxes Honor Medal',
