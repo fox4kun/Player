@@ -27,7 +27,7 @@ const players = {
     joinDate: 'May 27',
     image: '4.jpg'
   },
-  'AliMirghani': {
+  'AliMiAhmedAamirrghani': {
     id: '',
     badges: 'Darkness Fox',
     medals: '',
@@ -41,7 +41,7 @@ const players = {
     joinDate: 'June 11',
     image: '6.jpg'
   },
-  'AhmedAamir': {
+  'Addward': {
     id: '',
     badges: 'Navigator Fox',
     medals: '',
