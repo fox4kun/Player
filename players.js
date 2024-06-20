@@ -48,4 +48,11 @@ const players = {
     joinDate: 'June 12',
     image: '7.jpg'
   }
+  'Musab': {
+    id: '',
+    badges: 'The End Fox',
+    medals: '',
+    joinDate: 'June 20',
+    image: '8.jpg'
+}
 };
