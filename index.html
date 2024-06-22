@@ -1,103 +1,397 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Player List</title>
-<link rel="icon" type="image/jpeg" href="logo.jpg"> <!-- إضافة اللوجو كأيقونة الموقع -->
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #121212;
-    color: #fff;
-    margin: 0;
-    padding: 20px;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع الويب</title>
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            background-color: #E4E4E4;
+            color: ##000000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .login-container.active, .main-container.active, .download-container.active, .player-details-container.active, .profile-container.active {
+            display: flex;
+        }
 
-  .container {
-    max-width: 600px;
-    margin: auto;
-    background-color: #1e1e1e;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-    text-align: center;
-  }
+        .login-container {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
 
-  h1 {
-    color: #4CAF50;
-  }
+        .logo {
+            border-radius: 50%;
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .login-container, .main-container, .download-container, .player-details-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            max-width: 500px;
+        }
 
-  .logo-container {
-    margin-bottom: 20px;
-  }
+        .login-container.active, .main-container.active, .download-container.active, .player-details-container.active {
+            display: flex;
+        }
 
-  .logo-container img {
-    width: 100px;
-    height: auto;
-    border: 2px solid #4CAF50;
-    border-radius: 50%;
-    padding: 10px;
-    background-color: #333;
-  }
+        .login-container {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
 
-  .player-select {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 20px;
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #4CAF50;
-    border-radius: 4px;
-  }
+        input[type="text"], input[type="password"] {
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 10px;
+            width: 100%;
+        }
 
-  .btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+        }
 
-  .btn:hover {
-    background-color: #45a049;
-  }
-</style>
-<script src="players.js"></script>
-<script>
-  function goToPlayerPage() {
-    const playerSelect = document.getElementById('playerSelect');
-    const selectedPlayer = playerSelect.value;
-    if (selectedPlayer) {
-      window.location.href = `player.html?player=${selectedPlayer}`;
-    }
-  }
-</script>
+        button:hover {
+            background-color: #218838;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .card {
+            background-color: #E4E4E4;
+            width: 100%;
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 2px solid #28a745;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 20px;
+            border: 2px solid #28a745;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 1.5em;
+            flex-grow: 1;
+        }
+
+        .download-button {
+            width: 40px;
+            height: 40px;
+            background: url('download.png') no-repeat center center;
+            background-size: contain;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .download-button:hover {
+            transform: scale(1.1);
+        }
+
+        .arrows {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        .arrow {
+            width: 10px;
+            height: 10px;
+            border-left: 2px solid #28a745;
+            border-top: 2px solid #28a745;
+            transform: rotate(135deg);
+            margin-left: 5px;
+        }
+
+        .welcome {
+            margin: 20px 0;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        .player-details {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .player-details img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .player-details h2 {
+            margin: 10px 0;
+            color: #4CAF50;
+        }
+
+        .player-details p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .player-details span {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .back-btn, .logout-btn {
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .back-btn:hover, .logout-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        const players = {
+            'ALmegdad294': {
+                id: '12345',
+                badges: 'Detective Fox Badge',
+                medals: 'Foxes Honor Medal',
+                joinDate: 'May 23',
+                image: '1.jpg'
+            },
+            'Wenare': {
+                id: '12346',
+                badges: 'Wise Fox & Fox Savior',
+                medals: 'Foxes Honor Medal',
+                joinDate: 'May 24',
+                image: '2.jpg'
+            },
+            'MM': {
+                id: '12347',
+                badges: 'Ghost Fox Badge',
+                medals: 'Foxes Honor Medal',
+                joinDate: 'May 27',
+                image: '3.jpg'
+            },
+            'Bepo00001': {
+                id: '12348',
+                badges: 'Speed Fox',
+                medals: '',
+                joinDate: 'May 27',
+                image: '4.jpg'
+            },
+            'AliMirghani': {
+                id: '12349',
+                badges: 'Darkness Fox',
+                medals: '',
+                joinDate: 'May 27',
+                image: '5.jpg'
+            },
+            'xenoxflame': {
+                id: '12350',
+                badges: 'Fire Fox',
+                medals: '',
+                joinDate: 'June 11',
+                image: '6.jpg'
+            },
+            'Addward': {
+                id: '12351',
+                badges: 'Navigator Fox',
+                medals: '',
+                joinDate: 'June 12',
+                image: '7.jpg'
+            },
+            'Musab': {
+                id: '12352',
+                badges: 'The End Fox',
+                medals: '',
+                joinDate: 'June 20',
+                image: '8.jpg'
+            }
+        };
+
+        function checkPassword() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var error = document.getElementById('error');
+
+            if (players.hasOwnProperty(username) && password === '1234') {
+                localStorage.setItem('username', username);
+                showMainContent(username);
+            } else {
+                error.textContent = 'اسم المستخدم أو كلمة السر غير صحيحة';
+            }
+        }
+
+        function showMainContent(username) {
+            document.getElementById('login-container').classList.remove('active');
+            document.getElementById('main-container').classList.add('active');
+            document.getElementById('welcome').textContent = 'مرحبًا، ' + username + '!';
+        }
+
+        function showDownloadPage() {
+            document.getElementById('main-container').classList.remove('active');
+            document.getElementById('download-container').classList.add('active');
+        }
+
+        function showPlayerDetails() {
+            document.getElementById('main-container').classList.remove('active');
+            document.getElementById('player-details-container').classList.add('active');
+
+            var username = localStorage.getItem('username');
+            if (username && players.hasOwnProperty(username)) {
+                var player = players[username];
+                document.getElementById('playerName').innerText = username;
+                document.getElementById('playerId').innerText = player.id;
+                document.getElementById('playerBadges').innerText = player.badges;
+                document.getElementById('playerMedals').innerText = player.medals;
+                document.getElementById('joinDate').innerText = player.joinDate;
+                document.getElementById('playerImage').src = player.image;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('username');
+            document.getElementById('main-container').classList.remove('active');
+            document.getElementById('login-container').classList.add('active');
+        }
+
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        function startServer() {
+            window.location.href = 'https://aternos.org/server/';
+        }
+
+        function downloadGame(version) {
+            if (version === 'mobile') {
+                window.location.href = 'https://download2391.mediafire.com/awsn3u7os0ogkzLmPwJikI19ivzt6UPwCdlRyj2s24SyfeZN6V2UNo9wwoO4AomU9Ux0pR5es9Ta05-t_-_zlXtEc-SkPhYRMOKNd5ogjOdMmL2Y0SN1wqLPossDvOxAHoJwzh1mlTt9dgcGyVhMDd0vEV2aQ_iyodRhcG64FTs/vq9eogit7dja60x/Minecraft1.21download.apk';
+            } else if (version === 'java') {
+                window.location.href = 'https://www.wifi4games.com/pc_games/Minecraft.html';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var username = localStorage.getItem('username');
+            if (username && players.hasOwnProperty(username)) {
+                showMainContent(username);
+            }
+        });
+    </script>
 </head>
 <body>
+    <div class="login-container active" id="login-container">
+        <img src="logo.jpg" alt="Logo" class="logo">
+        <input type="text" id="username" placeholder="اسم المستخدم">
+        <input type="password" id="password" placeholder="كلمة السر">
+        <button onclick="checkPassword()">دخول</button>
+        <div id="error" class="error"></div>
+    </div>
 
-<div class="container">
-  <div class="logo-container">
-    <img src="logo.jpg" alt="Logo">
-  </div>
-  <h1>Select a Player</h1>
-  <select id="playerSelect" class="player-select">
-    <option value="">Choose a player...</option>
-    <option value="ALmegdad294">ALmegdad294</option>
-    <option value="Wenare">Wenare</option>
-    <option value="MM">M M</option>
-    <option value="Bepo00001">Bepo00001</option>
-    <option value="AliMirghani">Ali Mirghani</option>
-    <option value="xenoxflame">xenoxflame</option>
-    <option value="Addward">Addward</option>
-    <option value="Musab">Musab</option>
-  </select>
-  <button class="btn" onclick="goToPlayerPage()">View Details</button>
-</div>
 
+    <div class="main-container" id="main-container">
+        <div class="welcome" id="welcome"></div>
+        <div class="card" onclick="showPlayerDetails()">
+            <img src="1.png" alt="Icon" class="icon">
+            <h2>بيانات اللاعب</h2>
+            <div class="arrows">
+                <div class="arrow"></div>
+                <div class="arrow"></div>
+            </div>
+        </div>
+        <div class="card" onclick="startServer()">
+            <img src="2.png" alt="Icon" class="icon">
+            <h2>تشغيل العالم</h2>
+            <div class="arrows">
+                <div class="arrow"></div>
+                <div class="arrow"></div>
+            </div>
+        </div>
+        <div class="card" onclick="showDownloadPage()">
+            <img src="3.png" alt="Icon" class="icon">
+            <h2>تحميل اللعبة</h2>
+            <div class="arrows">
+                <div class="arrow"></div>
+                <div class="arrow"></div>
+            </div>
+        </div>
+        <div class="card" onclick="navigateTo('download_skins.html')">
+            <img src="4.png" alt="Icon" class="icon">
+            <h2>تحميل اسكنات</h2>
+            <div class="arrows">
+                <div class="arrow"></div>
+                <div class="arrow"></div>
+            </div>
+        </div>
+        <button class="logout-btn" onclick="logout()">خروج</button>
+    </div>
+
+    <div class="download-container" id="download-container">
+        <div class="card">
+            <img src="mobile.png" alt="Mobile Icon" class="icon">
+            <h2>تحميل Minecraft للجوال</h2>
+            <button class="download-button" onclick="downloadGame('mobile')"></button>
+        </div>
+        <div class="card">
+            <img src="java.png" alt="Java Icon" class="icon">
+            <h2>تحميل Minecraft للجافا</h2>
+            <button class="download-button" onclick="downloadGame('java')"></button>
+        </div>
+        <button class="back-btn" onclick="navigateTo('index.html')">العودة إلى القائمة</button>
+    </div>
+
+    <div class="player-details-container" id="player-details-container">
+        <div class="player-details">
+            <img id="playerImage" src="" alt="Player Icon">
+            <h2 id="playerName">Player Name: </h2>
+            <p>Player ID: <span id="playerId"></span></p>
+            <p>Player Badges: <span id="playerBadges"></span></p>
+            <p>Player Medals: <span id="playerMedals"></span></p>
+            <p>Join Date: <span id="joinDate"></span></p>
+        </div>
+        <button class="back-btn" onclick="navigateTo('index.html')">العودة إلى القائمة</button>
+    </div>
 </body>
 </html>
